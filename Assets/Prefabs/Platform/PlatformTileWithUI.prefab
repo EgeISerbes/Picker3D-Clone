@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611210457731037122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.59101367, y: 3.768495, z: 18.648603}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8069628146568368457}
@@ -49,6 +49,7 @@ MonoBehaviour:
   _ballPlatform: {fileID: 7698093885283099553}
   _invWall: {fileID: 0}
   _platform: {fileID: 8069628146568368461}
+  _p_approachRate: 0
 --- !u!1 &4412828714166868639
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,7 +78,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4412828714166868639}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 8, y: 0.4, z: 8}
   m_Children:
   - {fileID: 6739010463618749833}
@@ -353,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 8764355983200105914, guid: 76dd05c64c38c934497c5e975bd78f91,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8764355983200105914, guid: 76dd05c64c38c934497c5e975bd78f91,
         type: 3}

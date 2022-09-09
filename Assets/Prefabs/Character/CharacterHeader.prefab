@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711699be29987e84192a96cb2f993ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputOffset: 1
+  inputCamOffset: 1
+  _sensitivity: 0
 --- !u!1 &5126901531627891483
 GameObject:
   m_ObjectHideFlags: 0
