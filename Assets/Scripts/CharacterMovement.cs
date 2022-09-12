@@ -19,13 +19,16 @@ public class CharacterMovement : MonoBehaviour
     public float maxVelocity;
 
     [SerializeField] private float _slowedAmount;
-    
-    
+
+    [Header("End Phase Settings")]
+   [HideInInspector] public Transform _endTR;
+   [SerializeField] private float _endPhaseApproachRate;
     public enum CharState
     {
         Idle,
         Started,
-        EndPhase
+        EndPhase,
+        Restarted
     };
 
     [HideInInspector] public CharState charState = CharState.Idle;
@@ -97,6 +100,11 @@ public class CharacterMovement : MonoBehaviour
         {
             _targetPos.z = _rb.position.z + velocityZ * Time.deltaTime;
             _rb.MovePosition(_targetPos);
+        }
+        else if (charState == CharState.Restarted)
+        {
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, _endTR.position, _endPhaseApproachRate);
+            gameObject.transform.eulerAngles = Vector3.Lerp(gameObject.transform.eulerAngles, _endTR.eulerAngles, _endPhaseApproachRate);
         }
     }
 }

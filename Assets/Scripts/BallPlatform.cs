@@ -15,7 +15,7 @@ public class BallPlatform : MonoBehaviour
     {
         _targetVal = targetVal;
         this.OnBallsAreStacked = OnBallsAreStacked;
-        _textArr = _text.ToString().Split('/');
+        _textArr = _text.text.ToString().Split('/');
         _textArr[1] = targetVal.ToString();
         SetValueToUI();
     }
