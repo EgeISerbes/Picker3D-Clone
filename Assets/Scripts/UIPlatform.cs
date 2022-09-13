@@ -43,6 +43,7 @@ public class UIPlatform : MonoBehaviour
 
     public void LowerWall()
     {
+        
         _platform.SetActive(true);
         _canMove = true;
         _moraleText.gameObject.SetActive(true);

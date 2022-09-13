@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _startPos;
     [SerializeField] private Transform _charStartPos;
     private string _savePath;
+
+    [SerializeField] private float _endGameWaitSeconds;
+    [SerializeField] private float _restartGameWaitSeconds;
     private void Awake()
     {
         _savePath = Application.persistentDataPath + "/saveData.json"; 
@@ -19,6 +23,7 @@ public class GameManager : MonoBehaviour
         _uiManager.Init(GameStartState);
         _levelManager.ClearLevels();
         _levelManager.AddLevelsToScene();
+        _levelManager.GetLevelData(_savePath);
         _levelManager.SetPositions(out _startPos, out _charStartPos);
         OnStart();
         
@@ -28,8 +33,9 @@ public class GameManager : MonoBehaviour
     {
         
         _levelManager.LoadLevelatPos(new Pose(_startPos.position, _startPos.rotation),true);
-        _mainChar.transform.position = _charStartPos.position;
-        _mainChar.transform.rotation = _charStartPos.rotation;
+        _uiManager.SetLevelCount(_levelManager.CurrentLevelNumber);
+        SetCharacterPosition();
+        
         //_levelManager.SetPositions(out _startPos, out _charStartPos);
     }
     void GameFinished(bool hasWon)
@@ -42,16 +48,34 @@ public class GameManager : MonoBehaviour
             OnStart();
         }
         else
-        {
-            OnStart();
+        {   
+
+            RestartGame();
         }
     }
 
+    void SetCharacterPosition()
+    {
+        _mainChar.transform.position = _charStartPos.position;
+        _mainChar.transform.rotation = _charStartPos.rotation;
+    }
     void GameStartState(bool hasStarted)
     {
-
+        if(hasStarted)
+        {
+            _mainChar.StartState();
+        }
+        else
+        {
+            RestartGame();
+        }
     }
 
+    void RestartGame()
+    {
+        _levelManager.SaveLevelData(_savePath);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     private void OnApplicationFocus(bool focus)
     {
         if (!focus)
@@ -64,4 +88,5 @@ public class GameManager : MonoBehaviour
         _levelManager.SaveLevelData(_savePath);
     }
 
+    Ie
 }

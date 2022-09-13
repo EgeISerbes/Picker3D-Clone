@@ -23,7 +23,7 @@ public class MainChar : MonoBehaviour
     private void Awake()
     {
         //_characterMovement = GetComponent<CharacterMovement>();
-        _characterMovement.charState = CharacterMovement.CharState.Started;
+        //_characterMovement.charState = CharacterMovement.CharState.Started;
         _ballsController.Init(VelocityZ);
 
     }
@@ -52,6 +52,22 @@ public class MainChar : MonoBehaviour
                 GameFinished(false);
             }
            
+        }
+        else if (other.gameObject.CompareTag("EndPhaseTrigger"))
+        {
+            _characterMovement.charState = CharacterMovement.CharState.EndPhase;
+            _characterMovement.ModifyCollider();
+        }
+        else if (other.gameObject.CompareTag("EndPhasePiece"))
+        {
+
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("EndPhaseTrigger"))
+        {
+            _characterMovement.charState = CharacterMovement.CharState.Idle;
         }
     }
     private void OnExit()

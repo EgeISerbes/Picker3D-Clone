@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject _playButton;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _blurOBJ;
+    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private TextMeshProUGUI _points;
     private System.Action<bool> GameStartState;
     private void Awake()
     {
@@ -18,6 +21,7 @@ public class UIManager : MonoBehaviour
         _playButton.SetActive(true);
         _pauseButton.SetActive(false);
         _pauseMenu.SetActive(false);
+        _blurOBJ.SetActive(true);
         Time.timeScale = 1f;
     }
     public void Init(System.Action<bool> GameStartState)
@@ -29,6 +33,7 @@ public class UIManager : MonoBehaviour
     {
         _playButton.SetActive(false);
         _pauseButton.SetActive(true);
+        _blurOBJ.SetActive(false);
         GameStartState(true);
     }
 
@@ -48,8 +53,19 @@ public class UIManager : MonoBehaviour
     }
     public void GameRestarted()
     {
+        Time.timeScale = 1f;
+        _playButton.SetActive(true);
+        _pauseMenu.SetActive(false);
         GameStartState(false);
     }
 
-    
+    public void SetLevelCount(int level)
+    {
+        _levelText.SetText("Level " + level.ToString());
+    }
+
+    public void SetPoint(int point)
+    {
+        _points.SetText(point.ToString());
+    }
 }

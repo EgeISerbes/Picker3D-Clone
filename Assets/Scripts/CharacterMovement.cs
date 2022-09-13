@@ -7,7 +7,7 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 _targetPos;
     private Camera _mainCam;
-   [SerializeField] private InputManager _inputs;
+    [SerializeField] private InputManager _inputs;
     [SerializeField] private bool _isAI;
     [Header("Character Settings")]
     public float velocityZ;
@@ -21,8 +21,12 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _slowedAmount;
 
     [Header("End Phase Settings")]
-   [HideInInspector] public Transform _endTR;
-   [SerializeField] private float _endPhaseApproachRate;
+    [HideInInspector] public Transform _endTR;
+    [SerializeField] private float _endPhaseApproachRate;
+    [SerializeField] private MeshCollider _meshCollider;
+    [SerializeField] private float _pushForceStartAt;
+    [SerializeField] private float _forceIncreaseRateByEveryInput;
+    private bool _canTap = false;
     public enum CharState
     {
         Idle,
@@ -51,7 +55,10 @@ public class CharacterMovement : MonoBehaviour
     }
     private void Update()
     {
-        //GetInputs();
+        if (_canTap && _inputs.IsPressedOnce)
+        {
+            _pushForceStartAt += _forceIncreaseRateByEveryInput;
+        }
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -75,6 +82,12 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
+    public void ModifyCollider()
+    {
+        _meshCollider.convex = true;
+        _rb.isKinematic = false;
+        _canTap = true;
+    }
     void ControlKinematicState()
     {
         if (charState == CharState.Started)
@@ -84,7 +97,7 @@ public class CharacterMovement : MonoBehaviour
 
                 _targetPos.z = _rb.position.z + (velocityZ) * Time.deltaTime;
                 _rb.MovePosition(_targetPos);
-                
+
 
             }
             else
@@ -98,8 +111,8 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (charState == CharState.EndPhase)
         {
-            _targetPos.z = _rb.position.z + velocityZ * Time.deltaTime;
-            _rb.MovePosition(_targetPos);
+           
+            _rb.AddForce(new Vector3(0, 0, _pushForceStartAt));
         }
         else if (charState == CharState.Restarted)
         {

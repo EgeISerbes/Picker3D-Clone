@@ -6,9 +6,10 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public int currentLevelIndex;
-    public int nextLevelIndex;
+    public int currentLevelIndex = 0;
+    public int nextLevelIndex = 0;
     public int currentLevelNumber = 1;
+    public int points = 0;
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "LevelManager", order = 1)]
@@ -18,6 +19,10 @@ public class LevelManager : ScriptableObject
     private List<LevelObj> _spawnedLevels = new List<LevelObj>();
     private SaveData _saveData = new SaveData();
     private string _dataText = string.Empty;
+    public int CurrentLevelNumber
+    {
+        get => _saveData.currentLevelNumber;
+    }
     public void GetLevelData(string savePath)
     {
         _dataText = string.Empty;
@@ -72,7 +77,7 @@ public class LevelManager : ScriptableObject
         _spawnedLevels[_saveData.currentLevelIndex].gameObject.SetActive(false);
         _saveData.currentLevelIndex = _saveData.nextLevelIndex;
         _saveData.currentLevelNumber += 1;
-        if(_saveData.currentLevelNumber>_spawnedLevels.Count)
+        if(_saveData.currentLevelNumber>=_spawnedLevels.Count)
         {
             var randomIndex = Random.Range(0, _spawnedLevels.Count - 1);
             _saveData.nextLevelIndex = randomIndex;
@@ -88,7 +93,7 @@ public class LevelManager : ScriptableObject
         charStartPos = _spawnedLevels[_saveData.currentLevelIndex].charStartPos;
 
     }
-
+   
 
 
 }

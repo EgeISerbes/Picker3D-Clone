@@ -7,7 +7,7 @@ public class BallPlatform : MonoBehaviour
     [SerializeField] private TextMeshPro _text;
     private float _targetVal;
     private float _currentVal;
-    System.Action OnBallsAreStacked;
+    public System.Action OnBallsAreStacked;
     private string[] _textArr;
     private string _targetSTR;
 
@@ -34,9 +34,10 @@ public class BallPlatform : MonoBehaviour
     void ModifyText()
     {
         _currentVal += 1;
-        if(_currentVal>=_targetVal)
+        if(_currentVal>=_targetVal && OnBallsAreStacked != null)
         {
             OnBallsAreStacked();
+            OnBallsAreStacked = null;
         }
         _textArr[0] = _currentVal.ToString();
         SetValueToUI();

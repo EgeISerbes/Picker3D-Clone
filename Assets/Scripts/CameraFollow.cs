@@ -49,7 +49,7 @@ public class CameraFollow : MonoBehaviour
         if (cameraState == CameraState.Started || cameraState == CameraState.EndPhase)
         {
             _temp = transform.position;
-            _temp = new Vector3(Mathf.MoveTowards(_temp.x, (_mainCharacter.transform.position.x) * playerFollowRateX, playerVelocityXApproachRate), _temp.y, Mathf.MoveTowards(_temp.z, _mainCharacter.transform.position.z, _mainCharacter.VelocityZ * _cur_Multiplier));
+            _temp = new Vector3(Mathf.MoveTowards(_temp.x, (_mainCharacter.transform.position.x) * playerFollowRateX, playerVelocityXApproachRate), Mathf.MoveTowards(_temp.y,_mainCharacter.transform.position.y,playerVelocityXApproachRate), Mathf.MoveTowards(_temp.z, _mainCharacter.transform.position.z, _mainCharacter.VelocityZ * _cur_Multiplier));
             transform.position = _temp;
 
             if (cameraState == CameraState.EndPhase)

@@ -17,6 +17,10 @@ public class InputManager : MonoBehaviour
     { get => _inputValues.isPressed; }
     public bool IsReleased
     { get => _inputValues.isReleased; }
+    public bool IsPressedOnce
+    {
+        get => _inputValues.isPressedOnce;
+    }
     public Vector3 InputVal
     {
         get => _inputValues.inputPos;
@@ -38,6 +42,7 @@ public class InputManager : MonoBehaviour
     {
         public bool isPressed;
         public bool isReleased;
+        public bool isPressedOnce;
         public Vector3 inputPos;
         public Vector3 worldPos;
         public InputValues()
@@ -45,12 +50,14 @@ public class InputManager : MonoBehaviour
             inputPos = Vector3.zero;
             worldPos = Vector3.zero;
             isPressed = false;
-            isReleased = false; 
+            isReleased = false;
+            isPressedOnce = false;
         }
     }
     void GetInputs()
     {
         _inputValues.isReleased = false; //Always set isReleased false on running
+        _inputValues.isPressedOnce = false;
         if (Application.isEditor)
         {
             //_inputValues.isPressed = (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0)) ? true : false;
@@ -63,6 +70,7 @@ public class InputManager : MonoBehaviour
                 if(Input.GetMouseButtonDown(0))
                 {
                     _prevPos = _tempWorldPos;
+                    _inputValues.isPressedOnce = true;
                 }
                 
                  _diff = (_tempWorldPos - _prevPos)*_sensitivity;
@@ -93,6 +101,7 @@ public class InputManager : MonoBehaviour
                             _tempFingerID = inputs.fingerId;
                             _inputValues.isPressed = true;
                             _inputValues.isReleased = false;
+                            _inputValues.isPressedOnce = true;
                             _tempMousePos = new Vector3(inputs.position.x, inputs.position.y, 0) + new Vector3(0, 0, _mainCam.nearClipPlane + inputCamOffset);
                             _tempWorldPos = _mainCam.ScreenToWorldPoint(_tempMousePos);
                             _prevPos = _tempWorldPos;
