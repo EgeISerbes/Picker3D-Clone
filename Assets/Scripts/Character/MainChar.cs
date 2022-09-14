@@ -104,6 +104,7 @@ public class MainChar : MonoBehaviour
     public void SetTargetPos(Transform tr)
     {
         _characterMovement._endTR = tr;
+        gameObject.transform.eulerAngles = tr.eulerAngles;
     }
     public void SetRestartState()
     {

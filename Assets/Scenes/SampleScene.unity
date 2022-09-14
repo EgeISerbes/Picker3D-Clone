@@ -473,6 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2857653656906874707, guid: 8dde5c6170825aa45991f332f237df33,
         type: 3}
+      propertyPath: _pushForceStartAt
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857653656906874707, guid: 8dde5c6170825aa45991f332f237df33,
+        type: 3}
       propertyPath: _endPhaseApproachRate
       value: 0.1
       objectReference: {fileID: 0}

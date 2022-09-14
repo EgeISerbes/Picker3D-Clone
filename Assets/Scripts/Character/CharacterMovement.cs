@@ -128,7 +128,7 @@ public class CharacterMovement : MonoBehaviour
         else if (charState == CharState.Restarted)
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, _endTR.position, _endPhaseApproachRate);
-            gameObject.transform.eulerAngles = Vector3.Lerp(gameObject.transform.eulerAngles, _endTR.eulerAngles, _endPhaseApproachRate);
+           // gameObject.transform.eulerAngles = Vector3.Lerp(gameObject.transform.eulerAngles, _endTR.eulerAngles, _endPhaseApproachRate);
         }
     }
 }
