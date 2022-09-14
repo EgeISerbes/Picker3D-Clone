@@ -54,10 +54,11 @@ MonoBehaviour:
   _ballPlatform: {fileID: 7698093885283099553}
   _invBarrier: {fileID: 1252785075879204236}
   _moraleText: {fileID: 3772506304667221139}
-  _gateRotator: {fileID: 0}
+  _gateRotator: {fileID: 5108255868971713952}
   _platform: {fileID: 8069628146568368461}
   _p_approachRate: 0.02
-  _waitSeconds: 1
+  _barrierAvailableWaitSeconds: 0.5
+  _platformRaiseWaitSeconds: 1
 --- !u!65 &5702166844059372470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -653,6 +654,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1611210457731037125}
     m_Modifications:
+    - target: {fileID: 1830753605078817363, guid: f3c8ad704c6730b4cba554c338a252d1,
+        type: 3}
+      propertyPath: _targetRotationVal
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 2652411005354672548, guid: f3c8ad704c6730b4cba554c338a252d1,
         type: 3}
       propertyPath: m_Name
@@ -726,6 +732,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6884894499623935987}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5108255868971713952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1830753605078817363, guid: f3c8ad704c6730b4cba554c338a252d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6884894499623935987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68d8c9c02d56a04d98f27aa15fefdbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3772506304667221139 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7770588898467275616, guid: f3c8ad704c6730b4cba554c338a252d1,
