@@ -86,6 +86,7 @@ public class CharacterMovement : MonoBehaviour
     {
         _meshCollider.convex = true;
         _rb.isKinematic = false;
+        _rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
         _canTap = true;
     }
     void ControlKinematicState()
@@ -111,7 +112,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (charState == CharState.EndPhase)
         {
-           
+
             _rb.AddForce(new Vector3(0, 0, _pushForceStartAt));
         }
         else if (charState == CharState.Restarted)

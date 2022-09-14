@@ -38,19 +38,16 @@ public class GameManager : MonoBehaviour
         
         //_levelManager.SetPositions(out _startPos, out _charStartPos);
     }
-    void GameFinished(bool hasWon)
+    void GameFinished(bool hasWon,int points)
     {
         if (hasWon)
         {
-            _levelManager.SetNextLevel();
-            _levelManager.SetPositions(out _startPos, out _charStartPos);
-            _uiManager.SetStartMenu();
-            OnStart();
+            StartCoroutine(EndGameSequence());
         }
         else
-        {   
+        {
 
-            RestartGame();
+            StartCoroutine(RestartSequence());
         }
     }
 
@@ -88,5 +85,19 @@ public class GameManager : MonoBehaviour
         _levelManager.SaveLevelData(_savePath);
     }
 
-    Ie
+    IEnumerator RestartSequence()
+    {
+        yield return new WaitForSeconds(_restartGameWaitSeconds);
+        RestartGame();
+    }
+    IEnumerator EndGameSequence()
+    {
+        _levelManager.SetNextLevel();
+        _levelManager.SetPositions(out _startPos, out _charStartPos);
+        _mainChar.SetTargetPos(_charStartPos);
+        yield return new WaitForSeconds(_endGameWaitSeconds);
+     
+        _uiManager.SetStartMenu();
+        OnStart();
+    }
 }

@@ -25,8 +25,12 @@ public class BallPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             var ball = collision.gameObject.GetComponent<Ball>();
-            ball.Explode();
-            ModifyText();
+            if(!ball.hasExploded)
+            {
+                ball.Explode();
+                ModifyText();
+            }
+            
 
         }
     }

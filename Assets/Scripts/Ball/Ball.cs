@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     private GameObject _partRef;
     public Rigidbody rb;
     [SerializeField] private float _explodeTimer;
+    public bool hasExploded = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -15,6 +16,7 @@ public class Ball : MonoBehaviour
     public void Explode()
     {
         //var obj = Instantiate(_partRef, transform.position, transform.rotation);
+        hasExploded = true;
         StartCoroutine(Explosion());
         
     }

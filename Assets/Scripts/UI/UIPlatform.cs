@@ -9,19 +9,20 @@ public class UIPlatform : MonoBehaviour
     [SerializeField] private BallPlatform _ballPlatform;
     [SerializeField] private Collider _invBarrier;
     [SerializeField] private MoraleBoostUI _moraleText;
-    [SerializeField] private GateRotator _gateRotator;
+    [SerializeField] private Rotator _gateRotator;
 
     [Header("Platform Settings")]
     [SerializeField] private GameObject _platform;
     [SerializeField] private float _p_approachRate;
-    [SerializeField] private float _waitSeconds;
+    [SerializeField] private float _barrierAvailableWaitSeconds;
+    [SerializeField] private float _platformRaiseWaitSeconds;
     private Vector3 _targetPos;
     private bool _canMove = false;
     private System.Action OnExit;
 
     private void Awake()
     {
-        _targetPos = transform.position;
+       
         _invBarrier = GetComponent<Collider>();
         _ballPlatform.Init(LowerWall, _targetValue);
     }
@@ -43,20 +44,25 @@ public class UIPlatform : MonoBehaviour
 
     public void LowerWall()
     {
-        
+        StartCoroutine(RaisePlatform());
+    }
+
+    IEnumerator RaisePlatform()
+    {
+        yield return new WaitForSeconds(_platformRaiseWaitSeconds);
+        _targetPos = transform.position;
         _platform.SetActive(true);
         _canMove = true;
         _moraleText.gameObject.SetActive(true);
         _moraleText.SetMessageActive();
-        _gateRotator.RotateGates();
+        _gateRotator.RotateObjects();
         StartCoroutine(ExitTrigger());
-        
     }
-
     IEnumerator ExitTrigger()
     {
-        yield return new WaitForSeconds(_waitSeconds);
+        yield return new WaitForSeconds(_barrierAvailableWaitSeconds);
         _invBarrier.isTrigger = false;
+        //_gateRotator.StopRotating();
         OnExit();
     }
 }

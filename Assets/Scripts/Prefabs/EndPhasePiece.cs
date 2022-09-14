@@ -7,8 +7,14 @@ public class EndPhasePiece : MonoBehaviour
 {
     [SerializeField] TextMeshPro _text;
     [SerializeField] private int _val;
+
     private void Awake()
     {
         _text.SetText(_val.ToString());
+    }
+
+    public int GetPoints()
+    {
+        return _val;
     }
 }
