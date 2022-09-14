@@ -136,8 +136,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.769968, y: 8.375829, z: 10.427132}
-  m_Center: {x: 0.00039291382, y: 3.850079, z: 6.4406185}
+  m_Size: {x: 9.769968, y: 10.375829, z: 10.427132}
+  m_Center: {x: 0.00039291382, y: 4.850079, z: 6.4406185}
 --- !u!1 &5126901531627891483
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
@@ -232,10 +232,10 @@ MonoBehaviour:
   maxVelocity: 20
   _slowedAmount: 1
   _endTR: {fileID: 0}
-  _endPhaseApproachRate: 0
+  _endPhaseApproachRate: 0.2
   _meshCollider: {fileID: 7905271961248253526}
-  _pushForceStartAt: 12
-  _forceIncreaseRateByEveryInput: 1
+  _pushForceStartAt: 15
+  _forceIncreaseRateByEveryInput: 3
   charState: 0
 --- !u!65 &2164348536032405361
 BoxCollider:
@@ -579,25 +579,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3588711897104349017, guid: e85071d09680efc4dae8c022890240df,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5880791764857494529, guid: e85071d09680efc4dae8c022890240df,
         type: 3}
       propertyPath: m_Name
       value: UpgradedVersion
-      objectReference: {fileID: 0}
-    - target: {fileID: 6392732888115741957, guid: e85071d09680efc4dae8c022890240df,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806472898934680696, guid: e85071d09680efc4dae8c022890240df,
-        type: 3}
-      propertyPath: _approachRate
-      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e85071d09680efc4dae8c022890240df, type: 3}

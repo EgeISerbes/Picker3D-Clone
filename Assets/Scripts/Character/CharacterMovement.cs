@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
         Restarted
     };
 
-    [HideInInspector] public CharState charState = CharState.Idle;
+     public CharState charState = CharState.Idle;
 
     private void Awake()
     {
@@ -82,12 +82,20 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    public void ModifyCollider()
+    public void ModifyCollider(bool val)
     {
-        _meshCollider.convex = true;
-        _rb.isKinematic = false;
-        _rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
-        _canTap = true;
+        _meshCollider.convex = val;
+        _rb.isKinematic = !val;
+        if(val)
+        {
+            _rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            _rb.constraints = RigidbodyConstraints.None;
+        }
+         
+        _canTap = val;
     }
     void ControlKinematicState()
     {
@@ -112,8 +120,10 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (charState == CharState.EndPhase)
         {
-
+            //_targetPos = _rb.position + new Vector3(0, velocityZ * Mathf.Sin(15) * Time.deltaTime, velocityZ * Mathf.Cos(15) * Time.deltaTime);
+            //_targetPos.z = _rb.position.z + (velocityZ) * Time.deltaTime;
             _rb.AddForce(new Vector3(0, 0, _pushForceStartAt));
+            //_rb.MovePosition(_targetPos);
         }
         else if (charState == CharState.Restarted)
         {

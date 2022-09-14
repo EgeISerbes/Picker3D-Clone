@@ -11,6 +11,12 @@ public class MainChar : MonoBehaviour
     [SerializeField] private TriggerInteractions _trigger;
     System.Action<bool,int> GameFinished;
     private bool _hasEntered = false;
+    private bool _isFinishing = false;
+    public bool IsFinishing
+    {
+        set => _isFinishing = value;
+        get => _isFinishing;
+    }
     public float VelocityZ
     {
         get => _characterMovement.currentVelocityZ;
@@ -53,7 +59,7 @@ public class MainChar : MonoBehaviour
 
             var targetCount = uiPlatform.GetTargetVal();
             if (_ballsController.BallCount<targetCount)
-            {
+            {   
                 GameFinished(false,0);
             }
            
@@ -62,16 +68,16 @@ public class MainChar : MonoBehaviour
         {
             _characterMovement.charState = CharacterMovement.CharState.EndPhase;
             gameObject.transform.eulerAngles = other.transform.eulerAngles;
-            _characterMovement.ModifyCollider();
+            _characterMovement.ModifyCollider(true);
             _upgradedVersion.gameObject.SetActive(false);
             _upgradedVersion.MakeItAvailable(false);
         }
-        else if (other.CompareTag("EndPhasePiece"))
+        else if (other.CompareTag("EndPhasePiece")&&!_isFinishing)
         {
-
+            _isFinishing = true;
             var eP = other.GetComponent<EndPhasePiece>();
             GameFinished(true, eP.GetPoints());
-            _characterMovement.charState = CharacterMovement.CharState.Restarted;
+            
 
         }
         else if(other.CompareTag("Upgrader"))
@@ -98,5 +104,11 @@ public class MainChar : MonoBehaviour
     public void SetTargetPos(Transform tr)
     {
         _characterMovement._endTR = tr;
+    }
+    public void SetRestartState()
+    {
+        _characterMovement.ModifyCollider(false);
+        _characterMovement.charState = CharacterMovement.CharState.Restarted;
+        
     }
 }
