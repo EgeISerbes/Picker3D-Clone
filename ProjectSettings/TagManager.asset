@@ -7,6 +7,12 @@ TagManager:
   - UIPlatform
   - Ball
   - Barrier
+  - EndPhase
+  - EndPhaseTrigger
+  - EndPhasePiece
+  - Spawner
+  - PlayerEventTrigger
+  - Upgrader
   layers:
   - Default
   - TransparentFX
